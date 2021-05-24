@@ -6,7 +6,6 @@
 #include <EEPROM.h>
 #include <esp32fota.h>
 #include <WiFi.h>
-#include "FreeRTOS.h"
 
 /*--- Open-source libs ---*/
 #include "EspMQTTClient.h"
@@ -14,10 +13,6 @@
 
 /*--- Custom headers ---*/
 #include "config.h"
-#include "ad7091.h"
-#include "periph.h"
-#include "leds.h"
 #include "utilities.h"
-#include "mic.h"
 
 #endif
