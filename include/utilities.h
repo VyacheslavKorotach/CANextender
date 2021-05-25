@@ -13,4 +13,7 @@ void getAndSaveNewParams();
 #include <Preferences.h>
 #include <ArduinoJson.h>
 
+/*--- Prototypes ---*/
+void IRAM_ATTR resetModule(void);
+
 #endif

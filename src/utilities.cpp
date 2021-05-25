@@ -9,7 +9,7 @@ uint16_t EEPROM16_Read(uint8_t a) {
   return word(EEPROM.read(a + 1), EEPROM.read(a));
 }
 
-    /*--- Get and save params ---*/
+/*--- Get and save params ---*/
 void getAndSaveNewParams() {
   Serial.println("Start getting params");
   long paramGettingStart = millis();
@@ -41,4 +41,9 @@ void getAndSaveNewParams() {
   http.end();
   String getSetTime = String(millis() - paramGettingStart);
   Serial.println("Param get/set time: " + getSetTime);
+}
+
+void IRAM_ATTR resetModule() {
+  ets_printf("watchdog reboot\n");
+  esp_restart();
 }
