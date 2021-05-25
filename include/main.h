@@ -6,6 +6,8 @@
 #include <EEPROM.h>
 #include <esp32fota.h>
 #include <WiFi.h>
+#include <ESP32CAN.h>
+#include <CAN_config.h>
 
 /*--- Open-source libs ---*/
 #include "EspMQTTClient.h"
