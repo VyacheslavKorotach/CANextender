@@ -1,6 +1,9 @@
 #ifndef _CFG
 #define _CFG
 
+#define ON      1
+#define OFF     0
+
 /*--- Network parameters ---*/
 
         /*---WiFi ---*/
@@ -8,7 +11,7 @@
 #define WIFI_PASS       "salo54321///"
 
         /*--- MQTT ---*/
-#define MQTT_HOST       "korotach.com"
+#define MQTT_HOST       "ican.korotach.com"
 #define MQTT_PORT       1883
 #define MQTT_USER       "igor"
 #define MQTT_PASS       "igor1315"
@@ -34,7 +37,7 @@
 #define EEPROM_SIZE     2                             //EEPROM
 #define uS_TO_mS_FACTOR  1000ULL                       // Conversion factor for micro seconds to seconds
 #define TIME_TO_SLEEP   100                           // Time ESP32 will go to sleep (in milliseconds)
-#define WATCH_DOG_TIMEOUT 8000                       //time in ms to trigger the watchdog
+#define WATCH_DOG_TIMEOUT 18000                       //time in ms to trigger the watchdog
 #define ICAN_BUF 1024
 
 /*--- Operation mode config ---*/

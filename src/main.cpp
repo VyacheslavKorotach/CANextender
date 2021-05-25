@@ -92,9 +92,9 @@ void setup() {
 
 void loop() {
 
-  timerWrite(timer, 0);                           //reset timer (feed watchdog)
-
   client.loop();
+
+  timerWrite(timer, 0);                           //reset timer (feed watchdog)
 
   template_msg = "{\"dn\":";
   template_msg += "\"" + device_name + "\"";
@@ -132,6 +132,7 @@ void loop() {
     String can_received_data_topic = MQTT_DATA_RECEIVED_TOPIC;
     can_received_data_topic += device_name;
     client.publish(can_received_data_topic, mqtt_data_msg);
+    Serial.println(mqtt_data_msg);
 
     timerWrite(timer, 0);                       //reset timer (feed watchdog)
     EEPROM16_Write(address, counter);
@@ -155,7 +156,7 @@ void loop() {
     tx_frame.data.u8[5] = 0x05;
     tx_frame.data.u8[6] = 0x06;
     tx_frame.data.u8[7] = 0x07;
-    ESP32Can.CANWriteFrame(&tx_frame);
+    // ESP32Can.CANWriteFrame(&tx_frame);
 
     /*----- Publish sent data to MQTT -----*/
     String can_data = "can_sent_data_string";
@@ -172,13 +173,13 @@ void loop() {
     EEPROM.commit();   
     counter += 1;
 
-    /*--- Get new firmware if it needed ---*/
-    bool updatedNeeded = esp32FOTA.execHTTPcheck();
-    if (updatedNeeded)
-    {
-      timerAlarmDisable(timer);
-      esp32FOTA.execOTA();
-    }
+    // /*--- Get new firmware if it needed ---*/
+    // bool updatedNeeded = esp32FOTA.execHTTPcheck();
+    // if (updatedNeeded)
+    // {
+    //   timerAlarmDisable(timer);
+    //   esp32FOTA.execOTA();
+    // }
   }
 }
 
