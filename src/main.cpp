@@ -162,7 +162,6 @@ void loop() {
     tx_frame.data.u8[6] = 0x06;
     tx_frame.data.u8[7] = 0x07;
     ESP32Can.CANWriteFrame(&tx_frame);
-    // lets check git with this comment :)
 
     /*----- Publish sent data to MQTT -----*/
     String can_data = "can_sent_data_string";
