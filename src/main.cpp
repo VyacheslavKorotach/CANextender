@@ -75,14 +75,8 @@ void setup() {
   EEPROM16_Write(address, counter);
   EEPROM.commit();
 
-  /*--- Get new firmware if it needed ---*/
+  /*--- Firmware updator ---*/
   esp32FOTA.checkURL = OTAJSONADDRESS;
-  bool updatedNeeded = esp32FOTA.execHTTPcheck();
-  if (updatedNeeded)
-  {
-    timerAlarmDisable(timer);
-    esp32FOTA.execOTA();
-  }
 
   getAndSaveNewParams();  // Get and save new ican params
   timeToSleep = preferences.getULong("timeToSleep", timeToSleep); // Set up new gotten params
@@ -171,11 +165,20 @@ void loop() {
     String can_sent_data_topic = MQTT_DATA_SENT_TOPIC;
     can_sent_data_topic += device_name;
     client.publish(can_sent_data_topic, mqtt_data_msg);
+    Serial.println(mqtt_data_msg);
 
     timerWrite(timer, 0);                       //reset timer (feed watchdog)
     EEPROM16_Write(address, counter);
     EEPROM.commit();   
     counter += 1;
+
+    /*--- Get new firmware if it needed ---*/
+    bool updatedNeeded = esp32FOTA.execHTTPcheck();
+    if (updatedNeeded)
+    {
+      timerAlarmDisable(timer);
+      esp32FOTA.execOTA();
+    }
   }
 }
 
